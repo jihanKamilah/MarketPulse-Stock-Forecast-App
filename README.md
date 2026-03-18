@@ -1,4 +1,4 @@
-# 📊 Stock Forecast App (Dashboard Using Streamlit And Ngrok) 
+# 📊 Stock Forecast App (Dashboard) 
 **Model Comparison: Prophet vs ARIMA**
 
 An interactive web application for analyzing stock price trends and forecasting future movements using time series models.
