@@ -34,7 +34,11 @@ start_date = st.sidebar.date_input("Start date", datetime.date(2020,1,1))
 end_date = st.sidebar.date_input("End date", datetime.date(2021,1,1))
 
 ticker_list = pd.read_csv('yahoo_tickers.txt', header=None)[0].tolist()
-ticker = st.sidebar.selectbox("Stock", ticker_list)
+ticker = st.sidebar.selectbox(
+    "Stock",
+    ticker_list,
+    index=ticker_list.index("AA")
+)
 
 n_day = st.sidebar.slider("Forecast Days", 1, 60, 7)
 
@@ -99,9 +103,20 @@ st.dataframe(data.tail(int(show_last)), use_container_width=True)
 # =============================
 # PREPARE DATA
 # =============================
-df = data[['Date','Close']]
+df = data[['Date','Close']].copy()
 df.columns = ['ds','y']
 df = df.dropna()
+
+# =============================
+# HARD VALIDATION (WAJIB)
+# =============================
+if data.empty:
+    st.error("❌ No data retrieved. Please check ticker or date range.")
+    st.stop()
+
+if df.shape[0] < 10:
+    st.error("❌ Not enough data to train model. Try wider date range.")
+    st.stop()
 
 # =============================
 # PROPHET
