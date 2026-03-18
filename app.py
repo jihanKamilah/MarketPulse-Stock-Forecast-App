@@ -33,7 +33,7 @@ st.sidebar.header("⚙️ Settings")
 start_date = st.sidebar.date_input("Start date", datetime.date(2020,1,1))
 end_date = st.sidebar.date_input("End date", datetime.date(2021,1,1))
 
-ticker_list = pd.read_csv('/content/yahoo_tickers.txt', header=None)[0].tolist()
+ticker_list = pd.read_csv('Code & Tickers Data/yahoo_tickers.txt', header=None)[0].tolist()
 ticker = st.sidebar.selectbox("Stock", ticker_list)
 
 n_day = st.sidebar.slider("Forecast Days", 1, 60, 7)
